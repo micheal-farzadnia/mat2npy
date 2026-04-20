@@ -2,7 +2,7 @@ import h5py
 import numpy as np
 
 # Load MATLAB v7.3 file
-mat_path = "tc165.mat"
+mat_path = "data.mat"
 with h5py.File(mat_path, 'r') as f:
     tc = np.array(f['tc'])  # load dataset
 
@@ -15,6 +15,6 @@ tc_npy = tc.T
 print("Converted shape:", tc_npy.shape)
 
 # Save as .npy
-np.save("tc165.npy", tc_npy)
+np.save("output.npy", tc_npy)
 
-print("Saved as tc154.npy")
+print("Saved as output.npy")
