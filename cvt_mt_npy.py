@@ -1,20 +1,23 @@
 import h5py
 import numpy as np
 
-# Load MATLAB v7.3 file
-mat_path = "data.mat"
-with h5py.File(mat_path, 'r') as f:
-    tc = np.array(f['tc'])  # load dataset
+# N_subjects = 100
 
-# Check original shape
-print("Original shape:", tc.shape)
+for i in range(1,N_subjects):
 
-# Transpose to match (ROIs, timepoints)
-tc_npy = tc.T
+    # Load MATLAB v7.3 file
+    mat_path = f"tc{i:03d}.mat"
+    out_path = f"tc{i:03d}.npy"
 
-print("Converted shape:", tc_npy.shape)
+    with h5py.File(mat_path, 'r') as f:
+        tc = np.array(f['tc'])
 
-# Save as .npy
-np.save("output.npy", tc_npy)
+    print(f"{mat_path} original shape:", tc.shape)
 
-print("Saved as output.npy")
+    tc_npy = tc.T
+
+    print(f"{mat_path} converted shape:", tc_npy.shape)
+
+    np.save(out_path, tc_npy)
+
+    print(f"Saved {out_path}")
